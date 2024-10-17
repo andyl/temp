@@ -1,4 +1,7 @@
 name: Release
+
+# perform release 
+
 on:
   push:
     branches:
@@ -17,33 +20,36 @@ jobs:
         otp: [27.x]
         elixir: [1.17.x]
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
+      - name: Print success message 
+        run: echo "SUCCESS" 
 
-      - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
-
-      - uses: erlef/setup-beam@v1
-        id: install
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-        if: ${{ steps.release.outputs.release_created }}
-
-      - uses: actions/cache@v3
-        id: cache
-        if: ${{ steps.release.outputs.release_created }}
-        with:
-          path: |
-            deps
-            _build
-          key: ${{ runner.os }}-mix-${{steps.install.outputs.otp-version}}-${{steps.install.outputs.elixir-version}}-${{ hashFiles('**/mix.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-mix-${{steps.install.outputs.otp-version}}-${{steps.install.outputs.elixir-version}}-
-
-      - name: Install Dependencies
-        if: steps.release.outputs.release_created && steps.cache.outputs.cache-hit != 'true'
-        run: mix deps.get
+      # - uses: googleapis/release-please-action@v4
+      #   id: release
+      #
+      # - uses: actions/checkout@v4
+      #   if: ${{ steps.release.outputs.release_created }}
+      #
+      # - uses: erlef/setup-beam@v1
+      #   id: install
+      #   with:
+      #     otp-version: ${{matrix.otp}}
+      #     elixir-version: ${{matrix.elixir}}
+      #   if: ${{ steps.release.outputs.release_created }}
+      #
+      # - uses: actions/cache@v3
+      #   id: cache
+      #   if: ${{ steps.release.outputs.release_created }}
+      #   with:
+      #     path: |
+      #       deps
+      #       _build
+      #     key: ${{ runner.os }}-mix-${{steps.install.outputs.otp-version}}-${{steps.install.outputs.elixir-version}}-${{ hashFiles('**/mix.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-mix-${{steps.install.outputs.otp-version}}-${{steps.install.outputs.elixir-version}}-
+      #
+      # - name: Install Dependencies
+      #   if: steps.release.outputs.release_created && steps.cache.outputs.cache-hit != 'true'
+      #   run: mix deps.get
 
       # - name: publish to hex
       #   if: ${{ steps.release.outputs.release_created }}
