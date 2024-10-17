@@ -14,4 +14,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Lint commit messages
-        run: .github/scripts/lint-commit-messages.sh
+        run: .github/scripts/lint-commit-msgs.sh
