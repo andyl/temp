@@ -10,7 +10,7 @@ by adding `temp` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:temp, "~> 0.1.0"}
+    {:temp, "~> 0.1.1"}
   ]
 end
 ```
