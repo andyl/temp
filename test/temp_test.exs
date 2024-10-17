@@ -3,6 +3,6 @@ defmodule TempTest do
   doctest Temp
 
   test "greets the world" do
-    assert Temp.hello() == :world
+    assert Temp.hello() == "world"
   end
 end
