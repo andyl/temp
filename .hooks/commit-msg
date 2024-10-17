@@ -10,30 +10,23 @@ current_branch=$(git symbolic-ref --short HEAD)
 # Check for valid commit message 
 # --------------------------------------------------------------------
 
-# List of branches to run the hook on
-allowed_branches=("master" "test" "dev" "raw")
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
 
-# Check if the current branch is in the allowed list
-if [[ " ${allowed_branches[@]} " =~ " ${current_branch} " ]]; then
-    # Your existing lint check script goes here
-    commit_msg_file=$1
-    commit_msg=$(cat "$commit_msg_file")
+# Check if the commit message follows the Conventional Commits standard
+# The description must start with a lowercase letter
 
-    # Check if the commit message follows the Conventional Commits standard
-    # The description must start with a lowercase letter
+commit_types=(build chore ci docs feat fix perf refactor revert style test) 
+valid_types=$(IFS="|"; echo "${commit_types[*]}")
 
-    commit_types=(build chore ci docs feat fix perf refactor revert style test) 
-    valid_types=$(IFS="|"; echo "${commit_types[*]}")
-
-    if ! echo "$commit_msg" | grep -qE "^(${valid_types})(\(.+\))?: [a-z]"; then
-        echo "Error: Commit message does not follow the Conventional Commits standard."
-        echo "Use the format: <type>[(optional scope)]: <description>"
-        echo "Description must start with a lowercase letter."
-        echo "Valid types: [${commit_types[*]}]"
-        exit 1
-    fi
+if ! echo "$commit_msg" | grep -qE "^(${valid_types})(\(.+\))?: [a-z]"; then
+  echo "Error: Commit message does not follow the Conventional Commits standard."
+  echo "Use the format: <type>[(optional scope)]: <description>"
+  echo "Description must start with a lowercase letter."
+  echo "Valid types: [${commit_types[*]}]"
+  exit 1
 else
-    echo "Skipping commit message lint check for branch: $current_branch"
+  echo "VALID COMMIT MESSAGE [$commit_msg]"
 fi
 
 # --------------------------------------------------------------------
@@ -41,11 +34,11 @@ fi
 # --------------------------------------------------------------------
 
 if mix test > /dev/null 2>&1; then
-    echo "ALL TESTS PASS"
+  echo "ALL TESTS PASS"
 else
-    echo "Error: Some tests failed" 
-    echo "run 'mix test' to confirm"
-    exit 1
+  echo "Error: Some tests failed" 
+  echo "run 'mix test' to confirm"
+  exit 1
 fi
 
 # --------------------------------------------------------------------
@@ -53,11 +46,11 @@ fi
 # --------------------------------------------------------------------
 
 if mix format --check-formatted > /dev/null 2>&1; then
-    echo "FILES ARE FORMATTED"
+  echo "FILES ARE FORMATTED"
 else
-    echo "Error: Some files are not formatted" 
-    echo "run 'mix format' to fix"
-    exit 1
+  echo "Error: Some files are not formatted" 
+  echo "run 'mix format' to fix"
+  exit 1
 fi
 
 exit 0
