@@ -1,7 +1,7 @@
 # Hooks README
 
 This repo is configured to validate Github Pull Requests into the `master` and
-`dev` branches.  See the `.github` directory for workflow configurations.  
+`dev` branches.  See the `.github/workflows` directory for configurations.  
 
 These validations are used: 
 
