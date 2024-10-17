@@ -9,10 +9,10 @@ defmodule Temp do
   ## Examples
 
       iex> Temp.hello()
-      :world
+      "world"
 
   """
   def hello do
-    :world
+    "world"
   end
 end
