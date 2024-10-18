@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Get the commits in the pull request
-commits=$(git log --format=%B origin/master..HEAD)
+commits=$(git log --pretty=format:"%s" origin/master..HEAD)
 
 # Define the regex pattern for Conventional Commits
-conventional_commit_regex='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z \-]+\))?!?: [a-z].+'
+conventional_commit_regex='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z \-]+\))?!?: [a-z].+|^Merge.+'
 
 # Initialize error flag
 error=0
