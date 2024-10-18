@@ -5,6 +5,23 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.0](https://github.com/andyl/temp/compare/v0.1.3...v0.2.0) (2024-10-18)
+
+
+
+
+### Features:
+
+* Temp: add number function
+
+### Bug Fixes:
+
+* update README for hooks
+
+* change atom to string
+
+* update file4
+
 ## [v0.1.3](https://github.com/andyl/temp/compare/v0.1.2...v0.1.3) (2024-10-17)
 
 
