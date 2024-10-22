@@ -7,9 +7,6 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 ## [v0.2.0](https://github.com/andyl/temp/compare/v0.1.3...v0.2.0) (2024-10-18)
 
-
-
-
 ### Features:
 
 * Temp: add number function
